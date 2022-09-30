@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-
+import { AuthService } from '../auth.service';
 @Component({
   selector: 'app-title',
   templateUrl: './title.component.html',
@@ -9,12 +9,12 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class TitleComponent implements OnInit {
 
-  constructor(private http :HttpClient) { }
+  constructor(private http :HttpClient,private auth :AuthService) { }
 
   ngOnInit(): void {
   }
   title:String='';
-  
+
   titleAdd() {
     const headers = new HttpHeaders({ Authorization: `${localStorage.getItem('token')}`});
     this.http
@@ -26,5 +26,8 @@ export class TitleComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
       });
+  }
+  logout(){
+    this.auth.logout();
   }
 }
