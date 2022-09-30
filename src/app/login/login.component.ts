@@ -9,8 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private http: HttpClient,
-    private auth:AuthService,private router:Router) {}
+  constructor(
+    private http: HttpClient,
+    private auth: AuthService,
+    private router: Router
+  ) {}
 
   loginForm = new FormGroup({
     name: new FormControl(''),
@@ -38,10 +41,9 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((result: any) => {
         console.log(result);
-        localStorage.setItem('token',result.token);
-        this.auth.isLoggedIn=true;
+        localStorage.setItem('token', result.token);
+        this.auth.isLoggedIn = true;
         this.router.navigate(['addTitle']);
       });
   }
-
 }
